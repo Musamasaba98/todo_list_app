@@ -7,10 +7,10 @@ I'm trying to learn the new react router version 6.6. It gives elements or forme
 - createMemoryRouter 
 - RouterProvider 
 
-These allow elements to get data through the lorder functions and manipulate the data using action function. I call this super power functionality of react-router. Saving us from the pain of droping hooks everywhere👌👌👌
+These allow elements to get data through the lorder functions and manipulate the data using action function. I call this super power functionality of react-router. Saving us from the pain of spreading hooks everywhere👌👌👌
 
 ### Follow me up as I get this running
-First and foremost I created project using create react app and cleared up some files and my folder structure looked like
+First and foremost I created project using create-react-app, installed react-router-dom@latest and cleared up some files and my folder structure looked like
 ```
 src
    |---index.css
@@ -81,3 +81,5 @@ Since we are going to work with data, I created db.json file that contains my to
 I installed a json-server package that helped me to start a mock API sever and make the data from my file available at **http://localhost:3000**
 
 After setting all the pre-requisites for my project, lets give this a deep dive😠
+---
+---

@@ -1,8 +1,13 @@
 import React from 'react'
+import Feedback from '@mui/icons-material/Feedback';
+import { Outlet } from 'react-router-dom';
 
 const Root = () => {
   return (
-    <div>Root</div>
+    <div>
+
+      <div className="outlet"><Outlet/></div>
+    </div>
   )
 }
 

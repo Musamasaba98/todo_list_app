@@ -1,18 +1,30 @@
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Index, { loader as cardsLoader } from './Layouts/Index';
 import Root from './Layouts/root';
+import './App.css'
 
-const router=createBrowserRouter([
+
+const router = createBrowserRouter([
   {
-    path:"/",
-    element:<Root/>
+    index: true,
+    element: <Index />,
+    loader: cardsLoader,
+  },
+  {
+    path: "/",
+    element: <Root />
+  },
+  {
+    path: "tasks/:taskId",
   }
 ])
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router}/>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
