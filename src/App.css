@@ -11,7 +11,10 @@ html {
 *:after {
   box-sizing: inherit;
 }
-
+.disabled {
+  opacity: .6;
+  text-decoration: line-through;
+}
 body {
   font-family: var(--poppins);
 }
@@ -64,6 +67,7 @@ button:active {
   background: #4A3780 ;
 }
 .index-page__button{
+  margin-top: 1rem;
   width: 90vw;
 }
 .index-page__header--date{
@@ -90,24 +94,31 @@ button:active {
   max-height: 35vh;
   overflow: auto;
 }
-.index-page__bottom--tasks__all ul {
+.index-page__bottom--tasks__completed{
+  max-height: 27vh;
+  overflow: auto;
+}
+.index-page__bottom--tasks__all ul,.index-page__bottom--tasks__completed ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.index-page__bottom--tasks__all li {
+.index-page__bottom--tasks__all li,.index-page__bottom--tasks__completed li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #ffffff;
   padding: 1rem;
   margin: 0.25rem 0;
 }
-.index-page__bottom--tasks__all li:first-child {
+.index-page__bottom--tasks__all li:first-child,.index-page__bottom--tasks__completed li:first-child {
   border-radius:1rem 1rem 0 0 ;
 }
-.index-page__bottom--tasks__all li:last-child {
+.index-page__bottom--tasks__all li:last-child,.index-page__bottom--tasks__completed li:last-child {
   border-radius:0 0 1rem 1rem ;
 }
-.index-page__bottom--tasks__all a {
+.index-page__bottom--tasks__all a,.index-page__bottom--tasks__completed a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,15 +128,167 @@ button:active {
   text-decoration: none;
 }
 
-.index-page__bottom--tasks__all a:hover {
+.index-page__bottom--tasks__all a:hover,.index-page__bottom--tasks__completed a:hover {
   background: #e3e3e3;
 }
 
-.index-page__bottom--tasks__all a.active {
+.index-page__bottom--tasks__all a.active,.index-page__bottom--tasks__completed a.active {
   background: hsl(224, 98%, 58%);
   color: white;
 }
 
-.index-page__bottom--tasks__all a.pending {
+.index-page__bottom--tasks__all a.pending,.index-page__bottom--tasks__completed a.pending {
   color: hsl(224, 98%, 58%);
+}
+.task-list__item{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.task-list__item--left{
+  background-color: #e3e3e3;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  text-align: center;
+}
+.task-list__item--left .category{
+  line-height: 4;
+}
+.name__details{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.name__details .name,.time{
+  margin: 0;
+}
+.name__details .name{
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+/* checkbox */
+[type="checkbox"],[type="radio"] {
+  opacity: 0;
+}
+
+.custom-checkbox {
+  position: relative;
+  min-width: 1.4em;
+  min-height: 1.4em;
+  margin-right: 0.75em;
+  border: 2px solid #4A3780;
+  display: inline-block;
+}
+[type="checkbox"]:checked+label .custom-checkbox{
+   background-color: #4A3780;
+}
+[type="checkbox"]:checked+label .custom-checkbox::after {
+  position: absolute;
+  content: "\2713";
+  left: .1rem;
+  top:-.1rem;
+  color: white;
+}
+.create{
+  display: flex;
+  flex-direction: column;
+}
+.formik{
+  background-color: #e3e3e3;
+  height: 100vh;
+}
+.create{
+  margin: 1rem 1.2rem;
+}
+.formik input,textarea{
+  background-color: #ffffff;
+}
+.full-date{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+label input,textarea{
+  display: block;
+}
+.radioLabel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+.radio{
+  display: flex;
+  cursor: pointer;
+}
+.radioItem{
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+ 
+.radioItem span{
+  position: absolute;
+  top: 1rem;
+  padding:.25rem .25rem 0 .25rem ;
+  transition: all 300ms ease-in-out;
+}
+.radioClicked{
+  border-radius: 50%;
+  background-position: 40% 50%;
+  background:#000;
+  color: white;
+  
+}
+.radioItem span:first-child{
+  width: 8rem;
+}
+label input,textarea {
+  width: 100%;
+  height: 100%;
+  margin:1rem 0;
+}
+/* form for adding new task */
+.form-header{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  height: 15vh;
+  color: #fff;
+  background: #4A3780;
+}
+.icon{
+  position:absolute;
+  left: .3rem;
+  top: .5rem;
+  width: 2rem;
+}
+.create-btn{
+  position: absolute;
+  width: 90vw;
+  bottom: 2rem;
+}
+.edit-cancel__btn{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1rem;
+
+}
+/* css for the task card */
+.my-task__card{
+  margin: 0 1rem;
+}
+.task-btn{
+  left: 1rem;
+}
+.task-details{
+  font-size: 1.3rem;
+}
+.task-heading__name{
+  font-size: 2rem;
 }

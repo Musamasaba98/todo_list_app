@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getDate } from "../date";
-import Card from "./Card";
-import { NavLink, useLoaderData } from "react-router-dom";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
+import Receipt from "@mui/icons-material/Receipt";
+import Checkbox from "./Checkbox";
+import { CalendarMonth, EmojiEvents } from "@mui/icons-material";
 
 const Index = () => {
-  const cards = useLoaderData();
+  const tasks = useLoaderData();
+
   return (
     <div className="index-page">
       <div className="index-page__header">
@@ -14,34 +17,93 @@ const Index = () => {
       <div className="index-page__bottom">
         <div className="index-page__bottom--tasks">
           <div className="index-page__bottom--tasks__all">
-            {cards.length ? (
-              <ul className="cards-list">
-                {cards.map((card) => {
-                  return (
-                    <li key={card.id}>
-                      <NavLink
-                        to={`cards/${card.id}`}
-                        className={({ isActive, isPending }) =>
-                          isActive ? "active" : isPending ? "pending" : ""
-                        }
-                      >
-                        <div className="card-list__item"></div>
-                        {card.name}
-                      </NavLink>{" "}
-                    </li>
-                  );
-                })}
+            {tasks.length ? (
+              <ul className="tasks-list">
+                {tasks
+                  .filter((task) => task.checked == false)
+                  .map((task) => {
+                    return (
+                      <li key={task.id}>
+                        <NavLink
+                          to={`tasks/${task.id}`}
+                          className={({ isActive, isPending }) =>
+                            isActive ? "active" : isPending ? "pending" : ""
+                          }
+                        >
+                          <div className="task-list__item">
+                            <div className="task-list__item--left">
+                              <div className="category">
+                                {task.category === "Receipt" ? (
+                                  <Receipt />
+                                ) : false ||
+                                  task.category === "CalendarMonth" ? (
+                                  <CalendarMonth />
+                                ) : false || task.category === "EmojiEvents" ? (
+                                  <EmojiEvents />
+                                ) : (
+                                  false
+                                )}
+                              </div>
+                            </div>
+                            <div className="name__details">
+                              <p className="name">{task.name}</p>
+                              <p className="time">{task.time}</p>
+                            </div>
+                          </div>
+                        </NavLink>
+                        <Checkbox task={task} />
+                      </li>
+                    );
+                  })}
               </ul>
             ) : (
               "Add Task"
             )}
           </div>
           <h3 className="index-page__completed--heading">Completed</h3>
-          <div className="index-page__bottom--tasks__completed index-page__bottom--tasks__css">
-            <Card />
+          <div className="index-page__bottom--tasks__completed">
+            {tasks.length ? (
+              <ul className="tasks-list">
+                {tasks
+                  .filter((task) => task.checked == !false)
+                  .map((task) => {
+                    return (
+                      <li key={task.id}>
+                        <Link to={`/tasks/${task.id}/edit`}>
+                          <div className="task-list__item disabled">
+                            <div className="task-list__item--left">
+                              <div className="category">
+                                {task.category === "Receipt" ? (
+                                  <Receipt />
+                                ) : false ||
+                                  task.category === "CalendarMonth" ? (
+                                  <CalendarMonth />
+                                ) : false || task.category === "EmojiEvents" ? (
+                                  <EmojiEvents />
+                                ) : (
+                                  false
+                                )}
+                              </div>
+                            </div>
+                            <div className="name__details">
+                              <p className="name">{task.name}</p>
+                              <p className="time">{task.time}</p>
+                            </div>
+                          </div>
+                        </Link>
+                        <Checkbox task={task} />
+                      </li>
+                    );
+                  })}
+              </ul>
+            ) : (
+              "Add Task"
+            )}
           </div>
         </div>
-        <button className="index-page__button">Add New Task</button>
+        <Link to="tasks/create">
+          <button className="index-page__button">Add New Task</button>
+        </Link>
       </div>
     </div>
   );
